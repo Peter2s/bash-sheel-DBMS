@@ -1,32 +1,19 @@
 #!/bin/bash
-PS3="Please Choose a Number: "
-echo "Welcome to our DataBase"	
-select item in "List all DB" "List a certine DB"
-do
-	case $REPLY in
-	1)
-
-	subdircount=$(find `pwd` -maxdepth 1 -type d | wc -l)
-	if (("$subdircount" == 1 ))
+dataBasePath=$HOME/db
+Msg=" no Data Bases Exist"
+if [ -d $dataBasePath ]
 then
- echo " there is not any DB!"
-./main.sh
+	dataBasesCount=$(ls -d $dataBasePath | wc -l)
+	if [ $dataBasesCount -eq 1 ]
+	then
+		echo $Msg
+		./main.sh
+	else
+		ls -d $dataBasePath/*
+	fi
 else
- echo "here you go!"
-ls -d */ | cut -f1 -d'/'
-./main.sh
+	echo $Msg
+	./main.sh
 fi
-;;
-2) echo "please enter it's name to check if it exists or not: "
-read dbname
-if [[ -d $dbname ]]
-then
-echo "it is found heading back to the main manue!"
-./main.sh
-else 
-echo does not exsit!
-fi;;
+	
 
-	*) echo "please try again and enter only numbers from 1 to 2!";;
-	esac
-done

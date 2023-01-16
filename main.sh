@@ -6,13 +6,13 @@ select opt in "${options[@]}"
 do
     case $REPLY in
         1)
-            echo "you chose choice 1"
+            echo "1"
             ;;
         2)
-            echo "you chose choice 2"
+	    ./listDataBases.sh
             ;;
         3)
-            echo "you chose choice $REPLY which is $opt"
+            echo "3"
             ;;
         4)
             echo "4"
