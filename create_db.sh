@@ -4,7 +4,8 @@ clear
 yellow "Creating New Database" 
 while [ 1 ]
 do
-read -p "Enter DB name : " db_name 
+cyan "Enter DB name : " 
+read db_name 
 
 if [[ $db_name =~ ^[a-zA-Z][a-zA-Z0-9_]+$ ]]
 then
