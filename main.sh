@@ -12,7 +12,7 @@ do
 	    ./listDataBases.sh
             ;;
         3)
-            echo "3"
+            ./connectToDataBase.sh 
             ;;
         4)
             echo "4"

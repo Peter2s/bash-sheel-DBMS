@@ -1,19 +1,23 @@
 #!/bin/bash
+loc=$PWD
 dataBasePath=$HOME/db
 Msg=" no Data Bases Exist"
 if [ -d $dataBasePath ]
 then
-	dataBasesCount=$(ls -d $dataBasePath | wc -l)
+	cd $dataBasePath
+	dataBasesCount=$(ls -d */ | wc -l)
 	if [ $dataBasesCount -eq 1 ]
 	then
 		echo $Msg
-		./main.sh
+		$loc/main.sh
 	else
-		ls -d $dataBasePath/*
+		echo "number of DataBases is : ${dataBasesCount}"
+		ls -d */ | cut -f1 -d'/'
+		$loc/main.sh
 	fi
 else
 	echo $Msg
-	./main.sh
+	$loc/main.sh
 fi
 	
 
