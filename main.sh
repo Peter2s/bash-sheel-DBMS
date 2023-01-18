@@ -10,12 +10,14 @@ function showMenu() {
             echo "Craete DataBase"
         ;;
         2)
-            echo "List DataBases"
-            echo "List & Number of  DataBases"
-	    databaselist=$(ls -d */)
-            databaseNo=$(ls -d */ | cut -f1 -d"/" | wc -l)
-	    whiptail --title "Number of DataBases" --msgbox "Number of DataBases is : ${ls -d */}" 8 45
-            whiptail --title "List of DataBases" --msgbox "$databaselist" 10 45
+            dataBaseNo=$(ls -d */ | cut -f1 -d"/" | wc -l)
+	    if (("$dataBaseNo" == 0 ))
+	    then
+		dataBaseList='No DataBase exist'
+	   else
+		dataBaseList=$(ls -d */ | cut -f1 -d'/')
+	    fi
+	    whiptail --title "List of DataBases" --msgbox "Number Of DataBases : $dataBaseNo \n$dataBaseList" 10 45
 	    showMenu
                         
         ;;
