@@ -1,7 +1,7 @@
 #!/bin/bash
 . functions.sh
-function showTableMenu (){
 
+function showTableMenu (){
 selectedOpt=$(whiptail --title "Table Menu" --fb --menu "select options:" 17 60 0\
             "1" "Create Table" \
             "2" "List Tables" \
@@ -14,21 +14,18 @@ selectedOpt=$(whiptail --title "Table Menu" --fb --menu "select options:" 17 60 
 
             case $selectedOpt in
             1)
-            	 
-                 #green "Create Table"
-                 #selectedOpt=$(whiptail --title "List DataBases" --inputbox "Enter Table Name" 8 45 3>&1 1>&2 2>&3)
-                 ./create_table.sh
-                 #green $tableName
-             
+            	echo $db_name
+                 . create_table.sh             
             ;;
             2)
                 #green "List Tables"
-                tableNo=$(ls /db/$db_name | cut -f1 -d" " | wc -l)
+                tableNo=$(ls db/$db_name | cut -f1 -d" " | wc -l)
+                clear
 	   	 if (( "$tableNo" == 0 ))
 	   	 then
 			tableNo='No tables exist in this DataBase'
 	   	else
-			tableList=$(ls db/db_name)
+			tableList=$(ls db/$db_name)
 	    	fi
 		whiptail --title "List of Table" --scrolltext --msgbox "$tableNo\n$tableList" 30 35 
 		showTableMenu
@@ -36,13 +33,12 @@ selectedOpt=$(whiptail --title "Table Menu" --fb --menu "select options:" 17 60 
             3)
                 #green "Drop Table"
 		dropTable=$(whiptail --title "Delete Table" --inputbox "Enter table name" 8 45 3>&1 1>&2 2>&3)
-		./droptable.sh
+		. droptable.sh
 		showTableMenu
             ;;
             4)
                 #green "Insert Into Table"
-                . ../insertdata.sh
-	        showTableMenu
+                . insertdata.sh
             ;;
             5)
             	#green "Select From Table"
@@ -58,7 +54,6 @@ selectedOpt=$(whiptail --title "Table Menu" --fb --menu "select options:" 17 60 
             ;;
             8)
                 #green "Back to Main Menu"
-                clear
                 ./main.sh
             ;;
 esac
