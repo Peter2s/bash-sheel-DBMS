@@ -1,5 +1,5 @@
 #!/bin/bash
-db_name="nader" #FOR TESTING
+#db_name="nader" #FOR TESTING
 checktablename=$(whiptail --title "Choose Table" --inputbox "Enter Table Name" 8 45 3>&1 1>&2 2>&3)
 
 if ! [[ -f $checktablename ]]; then
