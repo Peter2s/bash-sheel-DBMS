@@ -1,10 +1,12 @@
 #!/bin/bash
-echo "please enter your database name"
-read -p dataBaseName
-if [ -f $HOME/db/$dataBaseName ]
-then
-	cd $HOME/db/$dataBaseName
+ dbToConnect=$(whiptail --title "Connect to DataBase" --inputbox "Enter your DataBase name " 8 45 3>&1 1>&2 2>&3)
+if [[ -d $dbConnect ]]; then
+	cd $dbConnect 
+	#. ../tablemenu.sh
+	echo "You are now connceted to $dbConnect Database successfully"
 else
-	echo "no data base exist"
-	./main.sh
+	whiptail --title "Error Message" --msgbox "Connection failed" 8 45
+        . ./main.sh	
+	echo "connection failed"
 fi
+

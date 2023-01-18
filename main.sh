@@ -14,7 +14,7 @@ function showMenu() {
 	    showMenu    
         ;;
         3)
-        ./connecToDB.sh  
+        connectToDataBase.sh
         ;;
         4)
         ;;
