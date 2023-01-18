@@ -1,4 +1,5 @@
 #!/bin/bash
+. functions.sh
  dbToConnect=$(whiptail --title "Connect to DataBase" --inputbox "Enter your DataBase name " 8 45 3>&1 1>&2 2>&3)
 if [[ -d $dbConnect ]]; then
 	cd $dbConnect 
@@ -7,6 +8,6 @@ if [[ -d $dbConnect ]]; then
 else
 	whiptail --title "Error Message" --msgbox "Connection failed" 8 45
         . ./main.sh	
-	echo "connection failed"
+        #red "connection failed"
 fi
 

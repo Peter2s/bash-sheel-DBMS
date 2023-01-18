@@ -10,13 +10,14 @@ function showMenu() {
             . create_db.sh
         ;;
         2)
-           ./listDataBases.sh
-	    showMenu    
+        ./listDataBases.sh
+         showMenu               
         ;;
         3)
         connectToDataBase.sh
         ;;
         4)
+        
         ;;
     esac
 }
