@@ -6,4 +6,4 @@ dataBaseNo=$(ls -d db/* | cut -f1 -d"/" | wc -l)
 	   else
 		dataBaseList=$(ls -d db/* | cut -f2 -d'/')
 	    fi
-	    whiptail --title "List of DataBases" --msgbox "Number Of DataBases : $dataBaseNo \n$dataBaseList" 30 45
+	    whiptail --title "List of DataBases" --scrolltext --msgbox "Number Of DataBases : $dataBaseNo \n$dataBaseList" 30 45

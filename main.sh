@@ -7,17 +7,18 @@ function showMenu() {
         "4" "Drop DataBase" 3>&1 1>&2 2>&3)
     case $selectedOpt in
         1)
-            . create_db.sh
+            	./create_db.sh
         ;;
         2)
-        ./listDataBases.sh
-         showMenu               
+        	./listDataBases.sh
+         	showMenu               
         ;;
         3)
-        connectToDataBase.sh
+        	./connectToDataBase.sh
         ;;
         4)
-        
+        	./dropDataBase.sh
+        	showMenu
         ;;
     esac
 }
