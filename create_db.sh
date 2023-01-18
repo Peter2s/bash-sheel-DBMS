@@ -30,14 +30,14 @@ do
 	 	then
 			red "DB name Can't start with a non char"
 			whiptail --title "Create Databse Message" --msgbox "DataBase [$db_name] isn't valid start with a character and no spaces in between." 8 45
-			break ##
+			
 		fi
 		#if [[ $db_name =~ [[:space:]] ]]
 		if [[ $db_name == *" "* ]] 
 		then 
 			red "DB name Can't Have any Spaces"
 			whiptail --title "Create Databse Message" --msgbox "DataBase [$db_name] isn't valid start with a char and no spaces between." 8 45
-			break ##
+			
 		fi
 		#red "please follow the rules of naming a dababase"
 	fi
