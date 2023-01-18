@@ -24,13 +24,13 @@ selectedOpt=$(whiptail --title "Table Menu" --fb --menu "select options:" 17 60 
             2)
                 #green "List Tables"
                 tableNo=$(ls | cut -f1 -d" " | wc -l)
-	   	 if (("$tableNo" == 0 ))
+	   	 if (( "$tableNo" == 0 ))
 	   	 then
 			tableNo='No tables exist in this DataBase'
 	   	else
 			tableList=$(ls)
 	    	fi
-		whiptail --title "List of Table" --scrolltext --msgbox "$tableListNo\n$tabeList" 30 45 
+		whiptail --title "List of Table" --scrolltext --msgbox "$tableNo\n$tableList" 30 35 
 		showTableMenu
             ;;
             3)
@@ -58,8 +58,9 @@ selectedOpt=$(whiptail --title "Table Menu" --fb --menu "select options:" 17 60 
             ;;
             8)
                 #green "Back to Main Menu"
-                cd ..
-                . ../main.sh
+                clear
+                cd ../..
+                ./main.sh
             ;;
 esac
 }
