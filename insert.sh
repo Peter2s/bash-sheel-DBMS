@@ -1,5 +1,5 @@
 #!/bin/bash
-#db_name="nader" #FOR TESTING
+db_name="nader" #FOR TESTING
 checktablename=$(whiptail --title "Choose Table" --inputbox "Enter Table Name" 8 45 3>&1 1>&2 2>&3)
 
 if ! [[ -f $checktablename ]]; then
@@ -8,7 +8,7 @@ if ! [[ -f $checktablename ]]; then
 fi
 
 
-checkcolsno=`awk 'END {print NR}' db/$db_name/$checktablename`
+checkcolsno=`awk 'END {print NR}' $checktablename`
 sep=":"
 echo $checkcolsno
 
@@ -50,7 +50,7 @@ for (( i=1 ; i <= $checkcolsno ; i++ )); do
 
 	fi
 
-	echo $checkisprimary
+	echo "checkcolname=$checkcolname"
 
 	if [[ $checkisprimary == "PK" ]]
 	then
@@ -60,8 +60,16 @@ for (( i=1 ; i <= $checkcolsno ; i++ )); do
 		while [[ true ]]; do 
 			
 			#if [[ $record =~ ^[`awk 'BEGIN{FS=":" ; ORS=" "}{if(NR != 1)print $(('$i'-1))}' $checktablename`]$ ]]; then
-			if [[ $record =~ ^[`awk 'BEGIN{FS=":" ; ORS=" "}{if(NR != 1)print $(('$i'-1))}' db/$db_name/$checktablename`]$ ]]; then
-
+			#awk 'BEGIN{FS=":" ; ORS=" "}{if(NR != 1)print $1}' db/nader/asd
+			#if [[ $record =~ ^[`awk 'BEGIN{FS=":" ; ORS=" "}{if(NR != 1)print $(('$i'-1))}' db/$db_name/$checktablename`]$ ]]; then
+			#echo $i
+			#echo $record
+			#echo `awk 'BEGIN{FS=":" ; ORS=" "}{if(NR != 1)print $'$i'}' db/$db_name/$checktablename`
+			#echo `awk -F"$sep" '{if(NR != 1) print $'$i'}' db/$db_name/$checktablename`
+			#echo `awk -F"$sep" '{if(NR != 1 && $'$i'=='$record')print $'$i'}' db/$db_name/$checktablename`
+			#if [[ $record =~ ^[`awk -F"$sep" '{if(NR != 1)print $'$i'}' db/$db_name/$checktablename`]$ ]]; then
+			if  [[ ! -z `awk -F"$sep" '{if(NR != 1 && $'$i'=="'$record'")print $'$i'}' db/$db_name/$checktablename` ]]; then
+				
 				whiptail --title "Error Message" --msgbox "Primary key can't be duplicated" 8 45
 
 			   echo $record     
