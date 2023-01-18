@@ -5,13 +5,11 @@
 if [[ -d db/$db_name ]]
 then
  	cd db/$db_name 
-
 	. ../../table.sh
 	echo "You are now connceted to $db_name Database successfully"
 else
 	whiptail --title "Error Message" --msgbox "Connection failed to $db_name" 8 45
 	#red "connection failed"
-	 echo $PWD
         . ./main.sh	
         
 fi

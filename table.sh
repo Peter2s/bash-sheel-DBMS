@@ -1,5 +1,5 @@
 #!/bin/bash
-. functions.sh
+. ../functions.sh
 function showTableMenu (){
 
 selectedOpt=$(whiptail --title "Table Menu" --fb --menu "select options:" 17 60 0\
@@ -14,14 +14,15 @@ selectedOpt=$(whiptail --title "Table Menu" --fb --menu "select options:" 17 60 
 
             case $selectedOpt in
             1)
+            	 
                  #green "Create Table"
-                 selectedOpt=$(whiptail --title "List DataBases" --inputbox "Enter Table Name" 8 45 3>&1 1>&2 2>&3)
+                 #selectedOpt=$(whiptail --title "List DataBases" --inputbox "Enter Table Name" 8 45 3>&1 1>&2 2>&3)
+                 . ../../create_table.sh
                  #green $tableName
              
             ;;
             2)
                 #green "List Tables"
-                echo $PWD
                 tableNo=$(ls | cut -f1 -d" " | wc -l)
 	   	 if (("$tableNo" == 0 ))
 	   	 then

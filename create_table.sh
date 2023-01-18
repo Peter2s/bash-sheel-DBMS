@@ -1,6 +1,6 @@
 #!/bin/bash
-. functions.sh
-function getDataType(){
+. ../../functions.sh
+function getDataType() {
 	datatypeMenu=$(whiptail --title "Data Type Menu " --fb --menu "select Data Type" 15 60 4 \
 		"1" "int"\
 		"2" "str"\
@@ -61,7 +61,7 @@ function getTableName(){
 
 # -----------------------------------------------------------------------------
 yellow "Creating New Table" 
-
+echo "create table $PWD"
 if [[ -z $db_name ]] #Empty 
 then
 	whiptail --title "Create Table" --msgbox "Connect TO DB first" 8 45
