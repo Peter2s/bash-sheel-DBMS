@@ -11,7 +11,7 @@ function getDataType(){
 
 		2)datatype="str";;
 		
-		3)datatype="bool";;
+		3)datatype="boolean";;
 		
 		*)datatype="";;
 	esac
@@ -61,7 +61,7 @@ function getTableName(){
 
 # -----------------------------------------------------------------------------
 yellow "Creating New Table" 
-db_name="nader" #FOR TESTING
+#db_name="nader" #FOR TESTING
 if [[ -z $db_name ]] #Empty 
 then
 	whiptail --title "Create Table" --msgbox "Connect TO DB first" 8 45
@@ -116,12 +116,16 @@ else # DB Found
 					  esac
 			  	fi
 				if [[ $i -eq $colsNum ]]; then
-				    echo  $colName >> $table_name;
-				    echo  $colName$sep$datatype$sep$isPrimary >> "db/$db_name/$table_name";
+					# TO Save Data
+				    echo  $colName >> "db/$db_name/$table_name";
+				    # TO Save MetaData
+				    echo  $colName$sep$datatype$sep$isPrimary >> $table_name;
 
 				else
-				      echo -n $colName$sep >> $table_name;
-				      echo  $colName$sep$datatype$sep$isPrimary$sep >> "db/$db_name/$table_name";
+				      # TO Save Data
+      				      echo -n $colName$sep >> "db/$db_name/$table_name"; 
+				      # TO Save MetaData
+				      echo  $colName$sep$datatype$sep$isPrimary$sep >> $table_name; 
 				fi
 					((i++)) # increase counter
 						
