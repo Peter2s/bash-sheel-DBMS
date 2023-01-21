@@ -1,7 +1,6 @@
 #!/bin/bash
 . functions.sh
-function getDataType() 
-{
+function getDataType(){
 	datatypeMenu=$(whiptail --title "Data Type Menu " --fb --menu "select Data Type" 15 60 4 \
 		"1" "int"\
 		"2" "str"\
@@ -17,8 +16,7 @@ function getDataType()
 		*)datatype="";;
 	esac
 }
-function getTableName()
-{
+function getTableName(){
 	# reset table name
 	while [ 1 ]
 	do

@@ -14,47 +14,48 @@ selectedOpt=$(whiptail --title "Table Menu" --fb --menu "select options:" 17 60 
 
             case $selectedOpt in
             1)
-            	echo $db_name
-                 . create_table.sh             
+                 . create_table.sh 
+                 . table.sh            
             ;;
             2)
                 #green "List Tables"
                 tableNo=$(ls db/$db_name | cut -f1 -d" " | wc -l)
                 clear
-	   	 if (( "$tableNo" == 0 ))
-	   	 then
-			tableNo='No tables exist in this DataBase'
-	   	else
-			tableList=$(ls db/$db_name)
-	    	fi
-		whiptail --title "List of Table" --scrolltext --msgbox "$tableNo\n$tableList" 30 35 
-		showTableMenu
+	   	         if (( "$tableNo" == 0 ))
+	   	         then
+			        tableNo='No tables exist in this DataBase'
+	         	else
+		        	tableList=$(ls db/$db_name)
+	        	fi
+		        whiptail --title "List of Table" --scrolltext --msgbox "$tableNo\n$tableList" 30 35 
+		        showTableMenu
             ;;
             3)
                 #green "Drop Table"
-		dropTable=$(whiptail --title "Delete Table" --inputbox "Enter table name" 8 45 3>&1 1>&2 2>&3)
-		. droptable.sh
-		showTableMenu
+		        dropTable=$(whiptail --title "Delete Table" --inputbox "Enter table name" 8 45 3>&1 1>&2 2>&3)
+		        . droptable.sh
+		        showTableMenu
             ;;
             4)
                 #green "Insert Into Table"
-                . insertdata.sh
+                . insert.sh
+                . table.sh
             ;;
             5)
             	#green "Select From Table"
-            	. ../selectmenu.sh
+            	. select.sh
             ;;
             6)
                 #green "Delete From Table"
-                . ../deleterecord.sh
+                . deleterecord.sh
             ;;
             7)
                 #green "Update Table"
-                . ../updatetable.sh
+                . updatetable.sh
             ;;
             8)
                 #green "Back to Main Menu"
-                ./main.sh
+                . main.sh
             ;;
 esac
 }
