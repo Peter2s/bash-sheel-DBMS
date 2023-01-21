@@ -5,7 +5,7 @@ function selectMenu () {
 selectMenu=$(whiptail --title "Select Menu" --fb --menu "select options:" 17 60 0\
             "1" "Select All Columns" \
             "2" "Select Specific Column" \
-            "3" "Select With Where Condition" \
+            "3" "Select  Where Condition" \
             "4" "Back to Table Menu" \
             "5" "Back to Main Menu" 3>&1 1>&2 2>&3)
 
