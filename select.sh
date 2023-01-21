@@ -33,7 +33,6 @@ selectMenu=$(whiptail --title "Select Menu" --fb --menu "select options:" 17 60 
 					selectMenu
                 else                                
                     colName=$(whiptail --title "Table Column"  --inputbox "Enter Column Name" 8 45 3>&1 1>&2 2>&3)
-                    #echo " befor cehck $checkColumnIsFound"
 					checkColumnIsFound=$(awk -F: '
                     {
                         if(NR==1)
@@ -59,8 +58,8 @@ selectMenu=$(whiptail --title "Select Menu" --fb --menu "select options:" 17 60 
                 fi
             ;;
             3)
-                #green "Select with Where Condition"
-                . ../selectwhere.sh 
+            #green "Select with Where Condition"
+            . selectWhere.sh 
             ;;
             4)
             #green "Back to Table Menu"
