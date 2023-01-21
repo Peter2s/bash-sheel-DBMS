@@ -51,7 +51,7 @@ selectedOpt=$(whiptail --title "Table Menu" --fb --menu "select options:" 17 60 
             ;;
             7)
                 #green "Update Table"
-                . updatetable.sh
+                . update.sh
             ;;
             8)
                 #green "Back to Main Menu"
