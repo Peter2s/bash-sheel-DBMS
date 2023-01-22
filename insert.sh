@@ -8,7 +8,7 @@ if ! [[ -f $checktablename ]]; then
 fi
 
 
-checkcolsno=`awk 'END {print NR}' $checktablename`
+checkcolsno=`awk 'END {print NR}' $checktablename` # check in metadata file
 sep=":"
 echo $checkcolsno
 
@@ -17,39 +17,14 @@ echo $checkcolsno
 
 for (( i=1 ; i <= $checkcolsno ; i++ )); do
 	#LOAD FROM METADATA
-	checkcolname=`awk 'BEGIN {FS=":"}{if ( NR=='$i' ) print $1 }' $checktablename`
-	checkdatatype=`awk 'BEGIN {FS=":"}{if ( NR=='$i' ) print $2 }' $checktablename`
-	checkisprimary=`awk 'BEGIN {FS=":"}{if ( NR=='$i' ) print $3 }' $checktablename`
+	checkcolname=`awk 'BEGIN {FS=":"}{if ( NR=='$i' ) print $1 }' $checktablename` # id , name, ... => col Name
+	checkdatatype=`awk 'BEGIN {FS=":"}{if ( NR=='$i' ) print $2 }' $checktablename`  # int or str or boolen
+	checkisprimary=`awk 'BEGIN {FS=":"}{if ( NR=='$i' ) print $3 }' $checktablename` #PK OR ""
 	
 	record=$(whiptail --title "Your Data" --inputbox "Enter data for $checkcolname with in data type ($checkdatatype)" 8 45 3>&1 1>&2 2>&3)
-
-	if [[ $checkdatatype == "int" ]]; then
-
-		while ! [[ $record =~ ^[0-9]+$ ]]; do
-
-			whiptail --title "Error Message" --msgbox "Not integer, Enter Record Again" 8 45
-
-			record=$(whiptail --title "Your Data" --inputbox "Enter data for $checkcolname with in data type ($checkdatatype)" 8 45 3>&1 1>&2 2>&3)
-
-		done
-
-	#$booleancheck="[Tt][Rr][Uu][Ee]|[Ff][Aa][Ll][Ss][Ee]"
-
-	elif [[ $checkdatatype == "boolean" ]]; then
-
-	       while ! [[ $record = "true" || $record = "false" || $record = "TRUE" || $record = "FALSE" || $record = "True" || $record = "False" || $record = "yes" || $record = "no" ]]; do
-
-	       		whiptail --title "Error Message" --msgbox "Not a boolean; Enter true , false , TRUE , FALSE , True , False , yes or no only" 8 45
-
-	 		record=$(whiptail --title "Your Data" --inputbox "Enter data for $checkcolname with in data type ($checkdatatype)" 8 45 3>&1 1>&2 2>&3)
-
-		done
-
-		echo $record
-
-
-	fi
-
+	
+	validte $checkdatatype # validte on data type 
+	
 	echo "checkcolname=$checkcolname"
 
 	if [[ $checkisprimary == "PK" ]]
@@ -58,16 +33,6 @@ for (( i=1 ; i <= $checkcolsno ; i++ )); do
 	echo $checkisprimary
 
 		while [[ true ]]; do 
-			
-			#if [[ $record =~ ^[`awk 'BEGIN{FS=":" ; ORS=" "}{if(NR != 1)print $(('$i'-1))}' $checktablename`]$ ]]; then
-			#awk 'BEGIN{FS=":" ; ORS=" "}{if(NR != 1)print $1}' db/nader/asd
-			#if [[ $record =~ ^[`awk 'BEGIN{FS=":" ; ORS=" "}{if(NR != 1)print $(('$i'-1))}' db/$db_name/$checktablename`]$ ]]; then
-			#echo $i
-			#echo $record
-			#echo `awk 'BEGIN{FS=":" ; ORS=" "}{if(NR != 1)print $'$i'}' db/$db_name/$checktablename`
-			#echo `awk -F"$sep" '{if(NR != 1) print $'$i'}' db/$db_name/$checktablename`
-			#echo `awk -F"$sep" '{if(NR != 1 && $'$i'=='$record')print $'$i'}' db/$db_name/$checktablename`
-			#if [[ $record =~ ^[`awk -F"$sep" '{if(NR != 1)print $'$i'}' db/$db_name/$checktablename`]$ ]]; then
 			if  [[ ! -z `awk -F"$sep" '{if(NR != 1 && $'$i'=="'$record'")print $'$i'}' db/$db_name/$checktablename` ]]; then
 				
 				whiptail --title "Error Message" --msgbox "Primary key can't be duplicated" 8 45
@@ -76,16 +41,9 @@ for (( i=1 ; i <= $checkcolsno ; i++ )); do
 
 			else
 				break;
-
-			
 			fi
-
 		record=$(whiptail --title "Your Data" --inputbox "Enter data for $checkcolname with in data type ($checkdatatype)" 8 45 3>&1 1>&2 2>&3)
-
-
 		done
-
-	
 	fi
 
 	if ! [[ $i == $checkcolsno ]]; then

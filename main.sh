@@ -1,4 +1,5 @@
 #!/bin/bash
+. function.sh
 function showMenu() {
     selectedOpt=$(whiptail --title "Main Menu" --fb --menu "Choose an option" 15 60 4 \
         "1" "Create DataBase" \
@@ -7,17 +8,17 @@ function showMenu() {
         "4" "Drop DataBase" 3>&1 1>&2 2>&3)
     case $selectedOpt in
         1)
-            	./create_db.sh
+            . create_db.sh
         ;;
         2)
-        	./listDataBases.sh
+        	. listDataBases.sh
          	showMenu               
         ;;
         3)
-        	./connectToDataBase.sh
+        	. connectToDataBase.sh
         ;;
         4)
-        	./dropDataBase.sh
+        	. dropDataBase.sh
         	showMenu
         ;;
     esac
