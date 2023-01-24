@@ -1,5 +1,4 @@
 #!/bin/bash
-
 tableName=$(whiptail --title "Table Name" --inputbox "Enter Table Name" 8 45 3>&1 1>&2 2>&3)
     ## check if table exist
     if ! [[ -f $tableName ]]; 
@@ -43,6 +42,7 @@ tableName=$(whiptail --title "Table Name" --inputbox "Enter Table Name" 8 45 3>&
 						. table.sh
 					else
 						newrecord=$(whiptail --title "Field Name" --inputbox "Enter new record" 8 45 3>&1 1>&2 2>&3)
+                        #### call function ######
                         validte $newrecord
                         #awk if (column=="condition") { gsub(old val,new val,feild number)
                                 awk -F: '{

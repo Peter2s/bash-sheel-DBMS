@@ -33,5 +33,4 @@ else
 			fi
 		fi
 	fi
-	. table.sh
 fi

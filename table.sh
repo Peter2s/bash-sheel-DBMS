@@ -46,7 +46,7 @@ selectedOpt=$(whiptail --title "Table Menu" --fb --menu "select options:" 17 60 
             ;;
             6)
                 #green "Delete From Table"
-                . deleterecord.sh
+                . delete.sh
             ;;
             7)
                 #green "Update Table"

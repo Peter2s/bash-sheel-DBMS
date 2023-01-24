@@ -1,6 +1,4 @@
 #!/bin/bash
-. functions.sh
-
 function selectMenu () {
 selectMenu=$(whiptail --title "Select Menu" --fb --menu "select options:" 17 60 0\
             "1" "Select All Columns" \

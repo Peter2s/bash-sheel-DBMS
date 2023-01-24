@@ -1,5 +1,4 @@
 #!/bin/bash
-. functions.sh
 clear
 yellow "Creating New Database" 
 while [ 1 ]

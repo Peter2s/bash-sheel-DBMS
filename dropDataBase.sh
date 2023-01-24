@@ -1,5 +1,4 @@
 #!/bin/bash
-. functions.sh
 dropName=$(whiptail --title "Drop DataBase" --inputbox "Enter your DataBase name to delete" 8 45 3>&1 1>&2 2>&3)
 if [[ -z $dropName ]]; 
 then
