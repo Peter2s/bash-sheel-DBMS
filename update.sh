@@ -43,6 +43,8 @@ else
                     ### call function ##
                     record=$(whiptail --title "Field Name" --inputbox "Enter new record" 8 45 3>&1 1>&2 2>&3)
                     validte  $checkdatatype
+                    validtePrimaryKey
+                    
 
 
 
@@ -64,3 +66,23 @@ else
     fi
     . table.sh
 fi
+
+function validtePrimaryKey(){
+    if [[ $checkisprimary == "PK" ]]
+	then
+	echo $checkisprimary
+
+		while [[ true ]]; do 
+			if  [[ ! -z `awk -F: '{if(NR != 1 && $'$fieldNumber'=="'$record'")print $"$'record'"}' db/$db_name/$tableName` ]]; then
+				
+				whiptail --title "Error Message" --msgbox "Primary key can't be duplicated" 8 45
+
+			   echo $record     
+
+			else
+				break;
+			fi
+            ecord=$(whiptail --title "Field Name" --inputbox "Enter new record" 8 45 3>&1 1>&2 2>&3)
+		done
+	fi
+}
