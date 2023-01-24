@@ -1,32 +1,17 @@
 #!/bin/bash
-PS3="Please Choose a Number: "
-echo "Welcome to our DataBase"	
-select item in "List all DB" "List a certine DB"
-do
-	case $REPLY in
-	1)
-
-	subdircount=$(find `pwd` -maxdepth 1 -type d | wc -l)
-	if (("$subdircount" == 1 ))
+dataBaseNo=$(ls -d db/* | cut -f1 -d"/" | wc -l)
+if (("$dataBaseNo" == 0 ))
 then
- echo " there is not any DB!"
-./main.sh
+	dataBaseList='No DataBase exist'
 else
- echo "here you go!"
-ls -d */ | cut -f1 -d'/'
-./main.sh
+	dataBaseList=$(ls -d db/* | cut -f2 -d'/')
 fi
-;;
-2) echo "please enter it's name to check if it exists or not: "
-read dbname
-if [[ -d $dbname ]]
+#echo $dataBaseNo;
+if [ $dataBaseNo -le 5 ]
 then
-echo "it is found heading back to the main manue!"
-./main.sh
-else 
-echo does not exsit!
-fi;;
-
-	*) echo "please try again and enter only numbers from 1 to 2!";;
-	esac
-done
+	menu_cols=12
+else
+	((menu_cols=$dataBaseNo+8))
+fi
+#echo $dataBaseNo;
+whiptail --title "List of DataBases" --scrolltext --msgbox "Number Of DataBases : $dataBaseNo \n$dataBaseList" $menu_cols 45
