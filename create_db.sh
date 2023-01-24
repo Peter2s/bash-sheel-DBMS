@@ -8,7 +8,7 @@ do
 	#read db_name 
 	db_name=''
 	db_name=$(whiptail --title "Create Databse" --inputbox "Enter DB name  [0 -> exit]: "  8 45 3>&1 1>&2 2>&3)
-	if [[ $db_name == "0" ]]
+	if [[ $db_name == "0" ]] || [[ -z $db_name ]]
 	then
 		cyan "You Choose to exit."
 		db_name=''
