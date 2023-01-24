@@ -1,5 +1,4 @@
 #!/bin/bash
-. functions.sh
 
 function showTableMenu (){
 selectedOpt=$(whiptail --title "Table Menu" --fb --menu "select options:" 17 60 0\
