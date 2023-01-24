@@ -1,24 +1,26 @@
 #!/bin/bash
-echo "welcome to Data Base"
-PS3='Please enter your choice: '
-options=("Create DB" "List DB" "Connect to DB" "Drop DB" "Exit")
-select opt in "${options[@]}"
-do
-    case $REPLY in
+. functions.sh
+function showMenu() {
+    selectedOpt=$(whiptail --title "Main Menu" --fb --menu "Choose an option" 15 60 4 \
+        "1" "Create DataBase" \
+        "2" "List DataBases" \
+        "3" "Connect To DataBase"\
+        "4" "Drop DataBase" 3>&1 1>&2 2>&3)
+    case $selectedOpt in
         1)
-            echo "you chose choice 1"
-            ;;
+            . create_db.sh
+        ;;
         2)
-            echo "you chose choice 2"
-            ;;
+        	. listDataBases.sh
+         	showMenu               
+        ;;
         3)
-            echo "you chose choice $REPLY which is $opt"
-            ;;
+        	. connectToDataBase.sh
+        ;;
         4)
-            echo "4"
-            ;;
-	5) break
-	     ;;
-        *) echo "invalid option $REPLY";;
+        	. dropDataBase.sh
+        	showMenu
+        ;;
     esac
-done
+}
+showMenu
