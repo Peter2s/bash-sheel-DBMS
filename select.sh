@@ -67,7 +67,7 @@ selectMenu=$(whiptail --title "Select Menu" --fb --menu "select options:" 17 60 
 			;;
             5)
             #green "Back to Main Menu"
-            cd ..
+  
             . main.sh
             ;;
             esac
