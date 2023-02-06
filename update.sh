@@ -82,7 +82,7 @@ function validtePrimaryKey(){
 			else
 				break;
 			fi
-            ecord=$(whiptail --title "Field Name" --inputbox "Enter new record" 8 45 3>&1 1>&2 2>&3)
+            record=$(whiptail --title "Field Name" --inputbox "Enter new record" 8 45 3>&1 1>&2 2>&3)
 		done
 	fi
 }
